@@ -6,22 +6,23 @@ jobs:
   run:
     name: Run
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
-      - name: Setup Node
-        uses: actions/setup-node@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v2-beta
         with:
-          node-version: '14.7'
+          node-version: '14.10'
+
+      - uses: AbsaOSS/k3d-action@v1.3.1
+        name: 'Create k3d cluster'
+        with:
+          cluster-name: 'test'
 
       - name: Install
         run: yarn install
-
-      - name: Changes
-        run: yarn files changed list
-        env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
       - name: Lint
         run: yarn checks lint

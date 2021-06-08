@@ -1,0 +1,20 @@
+{
+  "name": "@atls/k8s-kubectl-tool",
+  "version": "0.0.0",
+  "license": "BSD-3 Clause",
+  "private": true,
+  "main": "src/index.ts",
+  "files": [
+    "dist/"
+  ],
+  "dependencies": {
+    "@atls/k8s-resource-utils": "workspace:0.0.0",
+    "@atls/logger": "^0.0.1",
+    "execa": "^5.0.0",
+    "tempy": "^1.0.1",
+    "yaml": "^1.10.2"
+  },
+  "devDependencies": {
+    "@kubernetes/client-node": "^0.14.2"
+  }
+}

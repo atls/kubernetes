@@ -23,6 +23,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:."
       },
       {
+        "name": "@atls/k8s-kubectl-tool",
+        "reference": "workspace:tools/kubectl"
+      },
+      {
+        "name": "@atls/k8s-kustomize-tool",
+        "reference": "workspace:tools/kustomize"
+      },
+      {
         "name": "@atls/k8s-operator-logger",
         "reference": "workspace:utils/operator-logger"
       },
@@ -34,6 +42,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "enableTopLevelFallback": true,
     "ignorePatternData": "(^(?:\\.yarn\\/sdks(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)|$))$)",
     "fallbackExclusionList": [
+      ["@atls/k8s-kubectl-tool", ["workspace:tools/kubectl"]],
+      ["@atls/k8s-kustomize-tool", ["workspace:tools/kustomize"]],
       ["@atls/k8s-operator-logger", ["workspace:utils/operator-logger"]],
       ["@atls/k8s-resource-utils", ["workspace:utils/resource-utils"]],
       ["kubernetes", ["workspace:."]]
@@ -372,6 +382,35 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["typescript", "patch:typescript@npm%3A4.2.4#builtin<compat/typescript>::version=4.2.4&hash=a45b0e"]
           ],
           "linkType": "HARD",
+        }]
+      ]],
+      ["@atls/k8s-kubectl-tool", [
+        ["workspace:tools/kubectl", {
+          "packageLocation": "./tools/kubectl/",
+          "packageDependencies": [
+            ["@atls/k8s-kubectl-tool", "workspace:tools/kubectl"],
+            ["@atls/k8s-resource-utils", "workspace:utils/resource-utils"],
+            ["@atls/logger", "npm:0.0.1"],
+            ["@kubernetes/client-node", "npm:0.14.2"],
+            ["execa", "npm:5.0.0"],
+            ["tempy", "npm:1.0.1"],
+            ["yaml", "npm:1.10.2"]
+          ],
+          "linkType": "SOFT",
+        }]
+      ]],
+      ["@atls/k8s-kustomize-tool", [
+        ["workspace:tools/kustomize", {
+          "packageLocation": "./tools/kustomize/",
+          "packageDependencies": [
+            ["@atls/k8s-kustomize-tool", "workspace:tools/kustomize"],
+            ["@atls/k8s-resource-utils", "workspace:utils/resource-utils"],
+            ["@kubernetes/client-node", "npm:0.14.2"],
+            ["execa", "npm:5.0.0"],
+            ["tempy", "npm:1.0.1"],
+            ["yaml", "npm:1.10.2"]
+          ],
+          "linkType": "SOFT",
         }]
       ]],
       ["@atls/k8s-operator-logger", [
@@ -5048,6 +5087,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["crypto-random-string", [
+        ["npm:2.0.0", {
+          "packageLocation": "./.yarn/cache/crypto-random-string-npm-2.0.0-8ab47992ef-7bc19f6caf.zip/node_modules/crypto-random-string/",
+          "packageDependencies": [
+            ["crypto-random-string", "npm:2.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["cssom", [
         ["npm:0.3.8", {
           "packageLocation": "./.yarn/cache/cssom-npm-0.3.8-a9291d36ff-b7fb8b13aa.zip/node_modules/cssom/",
@@ -5338,6 +5386,23 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["define-property", "npm:2.0.2"],
             ["is-descriptor", "npm:1.0.2"],
             ["isobject", "npm:3.0.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["del", [
+        ["npm:6.0.0", {
+          "packageLocation": "./.yarn/cache/del-npm-6.0.0-fb1f14b406-da72707c92.zip/node_modules/del/",
+          "packageDependencies": [
+            ["del", "npm:6.0.0"],
+            ["globby", "npm:11.0.1"],
+            ["graceful-fs", "npm:4.2.4"],
+            ["is-glob", "npm:4.0.1"],
+            ["is-path-cwd", "npm:2.2.0"],
+            ["is-path-inside", "npm:3.0.3"],
+            ["p-map", "npm:4.0.0"],
+            ["rimraf", "npm:3.0.2"],
+            ["slash", "npm:3.0.0"]
           ],
           "linkType": "HARD",
         }]
@@ -8062,6 +8127,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/is-obj-npm-2.0.0-3d95e053f4-ffa67ed5df.zip/node_modules/is-obj/",
           "packageDependencies": [
             ["is-obj", "npm:2.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["is-path-cwd", [
+        ["npm:2.2.0", {
+          "packageLocation": "./.yarn/cache/is-path-cwd-npm-2.2.0-e35e4aab5f-900f6e8144.zip/node_modules/is-path-cwd/",
+          "packageDependencies": [
+            ["is-path-cwd", "npm:2.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["is-path-inside", [
+        ["npm:3.0.3", {
+          "packageLocation": "./.yarn/cache/is-path-inside-npm-3.0.3-2ea0ef44fd-b19a293744.zip/node_modules/is-path-inside/",
+          "packageDependencies": [
+            ["is-path-inside", "npm:3.0.3"]
           ],
           "linkType": "HARD",
         }]
@@ -12603,6 +12686,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["temp-dir", [
+        ["npm:2.0.0", {
+          "packageLocation": "./.yarn/cache/temp-dir-npm-2.0.0-e8af180805-d7816d1ce5.zip/node_modules/temp-dir/",
+          "packageDependencies": [
+            ["temp-dir", "npm:2.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["tempy", [
+        ["npm:1.0.1", {
+          "packageLocation": "./.yarn/cache/tempy-npm-1.0.1-12882f05f7-c598d89ec2.zip/node_modules/tempy/",
+          "packageDependencies": [
+            ["tempy", "npm:1.0.1"],
+            ["del", "npm:6.0.0"],
+            ["is-stream", "npm:2.0.0"],
+            ["temp-dir", "npm:2.0.0"],
+            ["type-fest", "npm:0.16.0"],
+            ["unique-string", "npm:2.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["terminal-link", [
         ["npm:2.1.1", {
           "packageLocation": "./.yarn/cache/terminal-link-npm-2.1.1-de80341758-f84553e11e.zip/node_modules/terminal-link/",
@@ -13087,6 +13193,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
+        ["npm:0.16.0", {
+          "packageLocation": "./.yarn/cache/type-fest-npm-0.16.0-e1b8ff05d9-d30834bb1d.zip/node_modules/type-fest/",
+          "packageDependencies": [
+            ["type-fest", "npm:0.16.0"]
+          ],
+          "linkType": "HARD",
+        }],
         ["npm:0.20.2", {
           "packageLocation": "./.yarn/cache/type-fest-npm-0.20.2-b36432617f-1f887bc615.zip/node_modules/type-fest/",
           "packageDependencies": [
@@ -13193,6 +13306,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["unique-slug", "npm:2.0.2"],
             ["imurmurhash", "npm:0.1.4"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["unique-string", [
+        ["npm:2.0.0", {
+          "packageLocation": "./.yarn/cache/unique-string-npm-2.0.0-3153c97e47-a2748b41ea.zip/node_modules/unique-string/",
+          "packageDependencies": [
+            ["unique-string", "npm:2.0.0"],
+            ["crypto-random-string", "npm:2.0.0"]
           ],
           "linkType": "HARD",
         }]
