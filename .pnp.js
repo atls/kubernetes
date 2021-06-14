@@ -23,6 +23,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:."
       },
       {
+        "name": "@atls/k8s-cert-manager-api",
+        "reference": "workspace:apis/cert-manager-api"
+      },
+      {
+        "name": "@atls/k8s-flux-toolkit-api",
+        "reference": "workspace:apis/flux-toolkit-api"
+      },
+      {
+        "name": "@atls/k8s-istio-api",
+        "reference": "workspace:apis/istio-api"
+      },
+      {
+        "name": "@atls/k8s-preview-automation-api",
+        "reference": "workspace:apis/preview-automation-api"
+      },
+      {
         "name": "@atls/k8s-kubectl-tool",
         "reference": "workspace:tools/kubectl"
       },
@@ -42,9 +58,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "enableTopLevelFallback": true,
     "ignorePatternData": "(^(?:\\.yarn\\/sdks(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)|$))$)",
     "fallbackExclusionList": [
+      ["@atls/k8s-cert-manager-api", ["workspace:apis/cert-manager-api"]],
+      ["@atls/k8s-flux-toolkit-api", ["workspace:apis/flux-toolkit-api"]],
+      ["@atls/k8s-istio-api", ["workspace:apis/istio-api"]],
       ["@atls/k8s-kubectl-tool", ["workspace:tools/kubectl"]],
       ["@atls/k8s-kustomize-tool", ["workspace:tools/kustomize"]],
       ["@atls/k8s-operator-logger", ["workspace:utils/operator-logger"]],
+      ["@atls/k8s-preview-automation-api", ["workspace:apis/preview-automation-api"]],
       ["@atls/k8s-resource-utils", ["workspace:utils/resource-utils"]],
       ["kubernetes", ["workspace:."]]
     ],
@@ -384,6 +404,42 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@atls/k8s-cert-manager-api", [
+        ["workspace:apis/cert-manager-api", {
+          "packageLocation": "./apis/cert-manager-api/",
+          "packageDependencies": [
+            ["@atls/k8s-cert-manager-api", "workspace:apis/cert-manager-api"],
+            ["@atls/k8s-resource-utils", "workspace:utils/resource-utils"],
+            ["@atls/logger", "npm:0.0.1"],
+            ["@kubernetes/client-node", "npm:0.14.2"]
+          ],
+          "linkType": "SOFT",
+        }]
+      ]],
+      ["@atls/k8s-flux-toolkit-api", [
+        ["workspace:apis/flux-toolkit-api", {
+          "packageLocation": "./apis/flux-toolkit-api/",
+          "packageDependencies": [
+            ["@atls/k8s-flux-toolkit-api", "workspace:apis/flux-toolkit-api"],
+            ["@atls/k8s-resource-utils", "workspace:utils/resource-utils"],
+            ["@atls/logger", "npm:0.0.1"],
+            ["@kubernetes/client-node", "npm:0.14.2"]
+          ],
+          "linkType": "SOFT",
+        }]
+      ]],
+      ["@atls/k8s-istio-api", [
+        ["workspace:apis/istio-api", {
+          "packageLocation": "./apis/istio-api/",
+          "packageDependencies": [
+            ["@atls/k8s-istio-api", "workspace:apis/istio-api"],
+            ["@atls/k8s-resource-utils", "workspace:utils/resource-utils"],
+            ["@atls/logger", "npm:0.0.1"],
+            ["@kubernetes/client-node", "npm:0.14.2"]
+          ],
+          "linkType": "SOFT",
+        }]
+      ]],
       ["@atls/k8s-kubectl-tool", [
         ["workspace:tools/kubectl", {
           "packageLocation": "./tools/kubectl/",
@@ -420,6 +476,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@atls/k8s-operator-logger", "workspace:utils/operator-logger"],
             ["@atls/logger", "npm:0.0.1"],
             ["@dot-i/k8s-operator", "npm:1.1.3"]
+          ],
+          "linkType": "SOFT",
+        }]
+      ]],
+      ["@atls/k8s-preview-automation-api", [
+        ["workspace:apis/preview-automation-api", {
+          "packageLocation": "./apis/preview-automation-api/",
+          "packageDependencies": [
+            ["@atls/k8s-preview-automation-api", "workspace:apis/preview-automation-api"],
+            ["@atls/k8s-resource-utils", "workspace:utils/resource-utils"],
+            ["@atls/logger", "npm:0.0.1"],
+            ["@kubernetes/client-node", "npm:0.14.2"]
           ],
           "linkType": "SOFT",
         }]

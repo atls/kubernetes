@@ -285,6 +285,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@atls/k8s-cert-manager-api@workspace:apis/cert-manager-api":
+  version: 0.0.0-use.local
+  resolution: "@atls/k8s-cert-manager-api@workspace:apis/cert-manager-api"
+  dependencies:
+    "@atls/k8s-resource-utils": "workspace:0.0.0"
+    "@atls/logger": ^0.0.1
+    "@kubernetes/client-node": ^0.14.2
+  languageName: unknown
+  linkType: soft
+
+"@atls/k8s-flux-toolkit-api@workspace:apis/flux-toolkit-api":
+  version: 0.0.0-use.local
+  resolution: "@atls/k8s-flux-toolkit-api@workspace:apis/flux-toolkit-api"
+  dependencies:
+    "@atls/k8s-resource-utils": "workspace:0.0.0"
+    "@atls/logger": ^0.0.1
+    "@kubernetes/client-node": ^0.14.2
+  languageName: unknown
+  linkType: soft
+
+"@atls/k8s-istio-api@workspace:apis/istio-api":
+  version: 0.0.0-use.local
+  resolution: "@atls/k8s-istio-api@workspace:apis/istio-api"
+  dependencies:
+    "@atls/k8s-resource-utils": "workspace:0.0.0"
+    "@atls/logger": ^0.0.1
+    "@kubernetes/client-node": ^0.14.2
+  languageName: unknown
+  linkType: soft
+
 "@atls/k8s-kubectl-tool@workspace:tools/kubectl":
   version: 0.0.0-use.local
   resolution: "@atls/k8s-kubectl-tool@workspace:tools/kubectl"
@@ -316,6 +346,16 @@ __metadata:
   dependencies:
     "@atls/logger": ^0.0.1
     "@dot-i/k8s-operator": ^1.1.1
+  languageName: unknown
+  linkType: soft
+
+"@atls/k8s-preview-automation-api@workspace:apis/preview-automation-api":
+  version: 0.0.0-use.local
+  resolution: "@atls/k8s-preview-automation-api@workspace:apis/preview-automation-api"
+  dependencies:
+    "@atls/k8s-resource-utils": "workspace:0.0.0"
+    "@atls/logger": ^0.0.1
+    "@kubernetes/client-node": ^0.14.2
   languageName: unknown
   linkType: soft
 
