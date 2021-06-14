@@ -11,7 +11,8 @@
   },
   "workspaces": [
     "utils/*",
-    "tools/*"
+    "tools/*",
+    "apis/*"
   ],
   "resolutions": {
     "@kubernetes/client-node": "0.14.2"
