@@ -39,6 +39,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:apis/preview-automation-api"
       },
       {
+        "name": "@atls/k8s-preview-automation-operator",
+        "reference": "workspace:operators/preview-automation-operator"
+      },
+      {
         "name": "@atls/k8s-kubectl-tool",
         "reference": "workspace:tools/kubectl"
       },
@@ -65,6 +69,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@atls/k8s-kustomize-tool", ["workspace:tools/kustomize"]],
       ["@atls/k8s-operator-logger", ["workspace:utils/operator-logger"]],
       ["@atls/k8s-preview-automation-api", ["workspace:apis/preview-automation-api"]],
+      ["@atls/k8s-preview-automation-operator", ["workspace:operators/preview-automation-operator"]],
       ["@atls/k8s-resource-utils", ["workspace:utils/resource-utils"]],
       ["kubernetes", ["workspace:."]]
     ],
@@ -488,6 +493,26 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@atls/k8s-resource-utils", "workspace:utils/resource-utils"],
             ["@atls/logger", "npm:0.0.1"],
             ["@kubernetes/client-node", "npm:0.14.2"]
+          ],
+          "linkType": "SOFT",
+        }]
+      ]],
+      ["@atls/k8s-preview-automation-operator", [
+        ["workspace:operators/preview-automation-operator", {
+          "packageLocation": "./operators/preview-automation-operator/",
+          "packageDependencies": [
+            ["@atls/k8s-preview-automation-operator", "workspace:operators/preview-automation-operator"],
+            ["@atls/k8s-flux-toolkit-api", "workspace:apis/flux-toolkit-api"],
+            ["@atls/k8s-istio-api", "workspace:apis/istio-api"],
+            ["@atls/k8s-kubectl-tool", "workspace:tools/kubectl"],
+            ["@atls/k8s-kustomize-tool", "workspace:tools/kustomize"],
+            ["@atls/k8s-operator-logger", "workspace:utils/operator-logger"],
+            ["@atls/k8s-preview-automation-api", "workspace:apis/preview-automation-api"],
+            ["@atls/k8s-resource-utils", "workspace:utils/resource-utils"],
+            ["@atls/logger", "npm:0.0.1"],
+            ["@dot-i/k8s-operator", "npm:1.1.3"],
+            ["@kubernetes/client-node", "npm:0.14.2"],
+            ["retry-ignore-abort", "npm:2.2.22"]
           ],
           "linkType": "SOFT",
         }]
@@ -5408,6 +5433,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/deepmerge-npm-4.2.2-112165ced2-85abf8e004.zip/node_modules/deepmerge/",
           "packageDependencies": [
             ["deepmerge", "npm:4.2.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["defekt", [
+        ["npm:7.2.0", {
+          "packageLocation": "./.yarn/cache/defekt-npm-7.2.0-35da77f801-d2bf3752b6.zip/node_modules/defekt/",
+          "packageDependencies": [
+            ["defekt", "npm:7.2.0"]
           ],
           "linkType": "HARD",
         }]
@@ -11640,6 +11674,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/retry-npm-0.12.0-72ac7fb4cc-51f2fddddb.zip/node_modules/retry/",
           "packageDependencies": [
             ["retry", "npm:0.12.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["retry-ignore-abort", [
+        ["npm:2.2.22", {
+          "packageLocation": "./.yarn/cache/retry-ignore-abort-npm-2.2.22-97a32485ea-7b785cc435.zip/node_modules/retry-ignore-abort/",
+          "packageDependencies": [
+            ["retry-ignore-abort", "npm:2.2.22"],
+            ["defekt", "npm:7.2.0"]
           ],
           "linkType": "HARD",
         }]
