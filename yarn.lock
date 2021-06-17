@@ -295,7 +295,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@atls/k8s-flux-toolkit-api@workspace:apis/flux-toolkit-api":
+"@atls/k8s-flux-toolkit-api@workspace:0.0.0, @atls/k8s-flux-toolkit-api@workspace:apis/flux-toolkit-api":
   version: 0.0.0-use.local
   resolution: "@atls/k8s-flux-toolkit-api@workspace:apis/flux-toolkit-api"
   dependencies:
@@ -305,7 +305,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@atls/k8s-istio-api@workspace:apis/istio-api":
+"@atls/k8s-istio-api@workspace:0.0.0, @atls/k8s-istio-api@workspace:apis/istio-api":
   version: 0.0.0-use.local
   resolution: "@atls/k8s-istio-api@workspace:apis/istio-api"
   dependencies:
@@ -315,7 +315,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@atls/k8s-kubectl-tool@workspace:tools/kubectl":
+"@atls/k8s-kubectl-tool@workspace:0.0.0, @atls/k8s-kubectl-tool@workspace:tools/kubectl":
   version: 0.0.0-use.local
   resolution: "@atls/k8s-kubectl-tool@workspace:tools/kubectl"
   dependencies:
@@ -328,7 +328,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@atls/k8s-kustomize-tool@workspace:tools/kustomize":
+"@atls/k8s-kustomize-tool@workspace:0.0.0, @atls/k8s-kustomize-tool@workspace:tools/kustomize":
   version: 0.0.0-use.local
   resolution: "@atls/k8s-kustomize-tool@workspace:tools/kustomize"
   dependencies:
@@ -340,7 +340,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@atls/k8s-operator-logger@workspace:utils/operator-logger":
+"@atls/k8s-operator-logger@workspace:0.0.0, @atls/k8s-operator-logger@workspace:utils/operator-logger":
   version: 0.0.0-use.local
   resolution: "@atls/k8s-operator-logger@workspace:utils/operator-logger"
   dependencies:
@@ -349,13 +349,31 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@atls/k8s-preview-automation-api@workspace:apis/preview-automation-api":
+"@atls/k8s-preview-automation-api@workspace:0.0.0, @atls/k8s-preview-automation-api@workspace:apis/preview-automation-api":
   version: 0.0.0-use.local
   resolution: "@atls/k8s-preview-automation-api@workspace:apis/preview-automation-api"
   dependencies:
     "@atls/k8s-resource-utils": "workspace:0.0.0"
     "@atls/logger": ^0.0.1
     "@kubernetes/client-node": ^0.14.2
+  languageName: unknown
+  linkType: soft
+
+"@atls/k8s-preview-automation-operator@workspace:operators/preview-automation-operator":
+  version: 0.0.0-use.local
+  resolution: "@atls/k8s-preview-automation-operator@workspace:operators/preview-automation-operator"
+  dependencies:
+    "@atls/k8s-flux-toolkit-api": "workspace:0.0.0"
+    "@atls/k8s-istio-api": "workspace:0.0.0"
+    "@atls/k8s-kubectl-tool": "workspace:0.0.0"
+    "@atls/k8s-kustomize-tool": "workspace:0.0.0"
+    "@atls/k8s-operator-logger": "workspace:0.0.0"
+    "@atls/k8s-preview-automation-api": "workspace:0.0.0"
+    "@atls/k8s-resource-utils": "workspace:0.0.0"
+    "@atls/logger": ^0.0.1
+    "@dot-i/k8s-operator": ^1.1.1
+    "@kubernetes/client-node": ^0.14.2
+    retry-ignore-abort: ^2.2.15
   languageName: unknown
   linkType: soft
 
@@ -4317,6 +4335,13 @@ __metadata:
   version: 4.2.2
   resolution: "deepmerge@npm:4.2.2"
   checksum: 85abf8e0045ee280996e7d2396979c877ef0741e413b716e42441110e0a83ac08098b2a49cea035510060bf667c0eae3189b2a52349f5fa4b000c211041637b1
+  languageName: node
+  linkType: hard
+
+"defekt@npm:7.2.0":
+  version: 7.2.0
+  resolution: "defekt@npm:7.2.0"
+  checksum: d2bf3752b691037c384f9f5b605222384afd64411d2d06a2f63a758e33a949b2170cb78c01745fdadea2f78f31c0fad50691628b5c6f914111e0e2b20f540d10
   languageName: node
   linkType: hard
 
@@ -9813,6 +9838,15 @@ resolve@^2.0.0-next.3:
   version: 0.1.15
   resolution: "ret@npm:0.1.15"
   checksum: 749c2fcae7071f5ecea4f8a18e35a79a8e8a58e522a16d843ecb9dfe9e647a76d92ae85c22690b02f87d3ab78b6b1f73341efc2fabbf59ed54dcfd9b1bdff883
+  languageName: node
+  linkType: hard
+
+"retry-ignore-abort@npm:^2.2.15":
+  version: 2.2.22
+  resolution: "retry-ignore-abort@npm:2.2.22"
+  dependencies:
+    defekt: 7.2.0
+  checksum: 7b785cc4354a66cbde9016511a16f27167724e4cac9c581f365924a1b6c8cc001567cc572d54d952bddfea1ee7ae0ea87a267826620f79ad7456b6145e3e2987
   languageName: node
   linkType: hard
 
