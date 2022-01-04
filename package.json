@@ -15,5 +15,6 @@
     "utils/*",
     "tools/*",
     "apis/*"
-  ]
+  ],
+  "packageManager": "yarn@3.1.1"
 }
