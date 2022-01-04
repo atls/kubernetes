@@ -3,9 +3,7 @@
   "license": "BSD 3-Clause",
   "private": true,
   "devDependencies": {
-    "@atls/actl-cli": "^0.4.41",
-    "@atls/k8s-k3d": "workspace:0.0.1",
-    "@atls/k8s-kubectl-tool": "workspace:0.0.1",
+    "@atls/actl-cli": "^0.4.50",
     "@atls/k8s-test-utils": "workspace:0.0.1",
     "@types/jest": "^27.0.2",
     "@types/node": "^16.11.6",
@@ -17,13 +15,5 @@
     "utils/*",
     "tools/*",
     "apis/*"
-  ],
-  "resolutions": {
-    "typescript": "4.4.4"
-  },
-  "dependenciesMeta": {
-    "@kubernetes/client-node@0.15.1": {
-      "unplugged": true
-    }
-  }
+  ]
 }

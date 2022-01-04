@@ -1,5 +1,5 @@
 {
-  "name": "@atls/k8s-kustomize-tool",
+  "name": "@atls/k8s-kustomize",
   "version": "0.0.1",
   "license": "BSD-3 Clause",
   "private": true,
@@ -9,11 +9,8 @@
   ],
   "dependencies": {
     "@atls/k8s-resource-utils": "workspace:0.0.1",
+    "@kubernetes/client-node": "^0.15.1",
     "execa": "^5.1.1",
-    "tempy": "^1.0.1",
-    "yaml": "^1.10.2"
-  },
-  "devDependencies": {
-    "@kubernetes/client-node": "^0.15.1"
+    "tempy": "^1.0.1"
   }
 }
