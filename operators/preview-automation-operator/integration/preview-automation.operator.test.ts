@@ -1,97 +1,50 @@
-/**
- * @jest-environment node
- */
-
 import { KubeConfig }                from '@kubernetes/client-node'
-import { retry }                     from 'retry-ignore-abort'
 import { join }                      from 'path'
+import faker                         from 'faker'
+import { setTimeout }                from 'node:timers/promises'
 
-import { kubectl }                   from '@atls/k8s-kubectl-tool'
+import { cluster }                   from '@atls/k8s-test-utils'
+import { KubeCtl }                   from '@atls/k8s-kubectl-tool'
 import { PreviewVersionApi }         from '@atls/k8s-preview-automation-api'
+import { PreviewAutomationApi }      from '@atls/k8s-preview-automation-api'
 
 import { PreviewAutomationOperator } from '../src'
 
 jest.setTimeout(120000)
 
 describe('preview-automation.operator', () => {
+  let previewAutomationApi: PreviewAutomationApi
   let previewVersionApi: PreviewVersionApi
   let operator: PreviewAutomationOperator
+  let kubeConfig: KubeConfig
 
   beforeAll(async () => {
-    const kubeConfig = new KubeConfig()
-
-    kubeConfig.loadFromDefault()
-
-    if (!kubeConfig.getCurrentContext().includes('test')) {
-      throw new Error('Require test kube config context.')
-    }
+    kubeConfig = await cluster.getKubeConfig()
 
     previewVersionApi = new PreviewVersionApi(kubeConfig)
+    previewAutomationApi = new PreviewAutomationApi(kubeConfig)
 
-    // TODO: run only on ci
-    await kubectl.run(['apply', '-f', join(__dirname, 'crd'), '--recursive'])
-    await kubectl.run(['apply', '-f', join(__dirname, 'specs'), '--recursive'])
+    const kubectl = new KubeCtl(kubeConfig)
+
+    await kubectl.applyFolder(join(__dirname, 'crd'))
+    await kubectl.applyFolder(join(__dirname, 'specs'))
   })
 
   beforeEach(async () => {
-    operator = new PreviewAutomationOperator()
+    operator = new PreviewAutomationOperator(kubeConfig)
 
     await operator.start()
   })
 
   afterEach(async () => {
-    await operator.stop()
+    if (operator) {
+      operator.stop()
+    }
   })
 
   it('create and delete preview version', async () => {
-    await previewVersionApi.createPreviewVersion('default', 'test', {
-      previewAutomationRef: {
-        namespace: 'default',
-        name: 'test',
-      },
-      tag: 'test',
-      context: {
-        kind: 'GitPullRequest',
-        number: 'test',
-      },
-    })
+    const resource = faker.random.word().toLowerCase()
 
-    const previewVersion = await retry(
-      async () => {
-        const version = await previewVersionApi.getPreviewVersion('default', 'test')
-
-        if (!version.status.ready) {
-          throw new Error('Preview version not ready')
-        }
-
-        return version
-      },
-      {
-        retries: 5,
-      }
-    )
-
-    expect(previewVersion).toBeDefined()
-
-    await previewVersionApi.deletePreviewVersion('default', 'test')
-
-    const deleted = await retry(
-      async () => {
-        try {
-          if (await previewVersionApi.getPreviewVersion('default', 'test')) {
-            throw new Error('Preview version exist')
-          }
-        } catch (error) {
-          if (error.body?.code !== 404) {
-            throw new Error('Preview version exist')
-          }
-        }
-      },
-      {
-        retries: 20,
-      }
-    )
-
-    expect(deleted).not.toBeDefined()
+    await setTimeout(5000)
   })
 })

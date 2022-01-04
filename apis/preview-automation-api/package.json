@@ -1,6 +1,6 @@
 {
   "name": "@atls/k8s-preview-automation-api",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "BSD-3-Clause",
   "main": "src/index.ts",
   "files": [
@@ -12,8 +12,8 @@
     "prepack": "yarn run build"
   },
   "dependencies": {
-    "@atls/k8s-resource-utils": "workspace:0.0.0",
+    "@atls/k8s-resource-utils": "workspace:0.0.1",
     "@atls/logger": "^0.0.1",
-    "@kubernetes/client-node": "^0.14.2"
+    "@kubernetes/client-node": "^0.15.1"
   }
 }

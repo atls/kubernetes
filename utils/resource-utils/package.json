@@ -1,6 +1,6 @@
 {
   "name": "@atls/k8s-resource-utils",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "BSD-3 Clause",
   "private": true,
   "main": "src/index.ts",
@@ -12,6 +12,6 @@
     "yaml": "^1.10.2"
   },
   "devDependencies": {
-    "@kubernetes/client-node": "^0.14.2"
+    "@kubernetes/client-node": "^0.15.1"
   }
 }

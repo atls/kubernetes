@@ -1,7 +1,13 @@
-import Operator                          from '@dot-i/k8s-operator'
 import { ResourceEventType }             from '@dot-i/k8s-operator'
+import { ResourceMetaImpl } from '@dot-i/k8s-operator'
+import { ResourceEvent } from '@dot-i/k8s-operator'
+import { KubeConfig }                    from '@kubernetes/client-node'
+import { CoreV1Api }                     from '@kubernetes/client-node'
+import { HttpError }                     from '@kubernetes/client-node'
+import { Watch }                     from '@kubernetes/client-node'
 import { Logger }                        from '@atls/logger'
 
+import { Operator } from '@atls/k8s-operator'
 import { PreviewAutomationApi }          from '@atls/k8s-preview-automation-api'
 import { PreviewVersionApi }             from '@atls/k8s-preview-automation-api'
 import { PreviewAutomationDomain }       from '@atls/k8s-preview-automation-api'
@@ -14,7 +20,7 @@ import { GatewayApi }                    from '@atls/k8s-istio-api'
 import { ImageRepositoryApi }            from '@atls/k8s-flux-toolkit-api'
 import { SourceApi }                     from '@atls/k8s-flux-toolkit-api'
 import { kustomize }                     from '@atls/k8s-kustomize-tool'
-import { kubectl }                       from '@atls/k8s-kubectl-tool'
+import { KubeCtl }                       from '@atls/k8s-kubectl-tool'
 import { OperatorLogger }                from '@atls/k8s-operator-logger'
 import { kind2Plural }                   from '@atls/k8s-resource-utils'
 
@@ -31,29 +37,32 @@ export class PreviewAutomationOperator extends Operator {
 
   private readonly sourceApi: SourceApi
 
-  constructor() {
-    super(new OperatorLogger(PreviewAutomationOperator.name))
+  private readonly kubectl: KubeCtl
+
+  constructor(kubeConfig?: KubeConfig) {
+    super(kubeConfig)
 
     this.previewAutomationApi = new PreviewAutomationApi(this.kubeConfig)
     this.previewVersionApi = new PreviewVersionApi(this.kubeConfig)
     this.imageRepositoryApi = new ImageRepositoryApi(this.kubeConfig)
     this.gatewayApi = new GatewayApi(this.kubeConfig)
     this.sourceApi = new SourceApi(this.kubeConfig)
+    this.kubectl = new KubeCtl(this.kubeConfig)
   }
 
   async buildPreview(previewVersion: PreviewVersionResource) {
     const automation = await this.previewAutomationApi.getPreviewAutomation(
       previewVersion.spec.previewAutomationRef.namespace ||
-        previewVersion.metadata?.namespace ||
-        'default',
+      previewVersion.metadata?.namespace ||
+      'default',
       previewVersion.spec.previewAutomationRef.name
     )
 
     const gateway = automation.spec.gatewayRef
       ? await this.gatewayApi.getGateway(
-          automation.spec.gatewayRef.namespace || automation.metadata?.namespace || 'default',
-          automation.spec.gatewayRef.name
-        )
+        automation.spec.gatewayRef.namespace || automation.metadata?.namespace || 'default',
+        automation.spec.gatewayRef.name
+      )
       : null
 
     const imageRepository = await this.imageRepositoryApi.getImageRepository(
@@ -72,19 +81,19 @@ export class PreviewAutomationOperator extends Operator {
       name: automation.metadata!.name!,
       endpoint: gateway
         ? {
-            name: gateway.metadata!.name!,
-            namespace: gateway.metadata?.namespace || 'default',
-            hosts: gateway.spec.servers
-              .map((server) => server.hosts)
-              .flat()
-              .filter((host) => host.startsWith('*.'))
-              .map((host) =>
-                host.replace(
-                  '*.',
-                  `${automation.metadata!.name}-${previewVersion.spec.context.number}.`
-                )
-              ),
-          }
+          name: gateway.metadata!.name!,
+          namespace: gateway.metadata?.namespace || 'default',
+          hosts: gateway.spec.servers
+            .map((server) => server.hosts)
+            .flat()
+            .filter((host) => host.startsWith('*.'))
+            .map((host) =>
+              host.replace(
+                '*.',
+                `${automation.metadata!.name}-${previewVersion.spec.context.number}.`
+              )
+            ),
+        }
         : undefined,
       context: previewVersion.spec.context,
       source: {
@@ -109,7 +118,7 @@ export class PreviewAutomationOperator extends Operator {
         'preview.atls.tech/automation': JSON.stringify(annotation),
       },
     }
-
+    console.log(resources)
     return kustomize.build(resources, transformations)
   }
 
@@ -128,7 +137,7 @@ export class PreviewAutomationOperator extends Operator {
 
       const preview = await this.buildPreview(resource)
 
-      await kubectl.apply(preview)
+      await this.kubectl.apply(preview)
 
       await this.previewVersionApi.updatePreviewVersionStatus(
         resource.metadata?.namespace || 'default',
@@ -147,9 +156,9 @@ export class PreviewAutomationOperator extends Operator {
     try {
       const preview = await this.buildPreview(resource)
 
-      await kubectl.delete(preview)
+      await this.kubectl.delete(preview)
     } catch (error) {
-      this.log.error(error.body || error)
+      this.log.error((error as HttpError)?.body)
     }
   }
 
@@ -159,6 +168,7 @@ export class PreviewAutomationOperator extends Operator {
       PreviewVersionResourceVersion.v1alpha1,
       kind2Plural(PreviewVersionResourceGroup.PreviewVersion),
       async (event) => {
+        /*
         try {
           if (event.type === ResourceEventType.Added || event.type === ResourceEventType.Modified) {
             const finalizer = `${kind2Plural(PreviewVersionResourceGroup.PreviewVersion)}.${
@@ -174,7 +184,7 @@ export class PreviewAutomationOperator extends Operator {
             }
           }
         } catch (error) {
-          this.log.error(error.body || error)
+          this.log.error((error as HttpError).body)
 
           try {
             await this.previewVersionApi.updatePreviewVersionStatus(
@@ -182,15 +192,16 @@ export class PreviewAutomationOperator extends Operator {
               event.object.metadata!.name!,
               {
                 observedGeneration: event.object.metadata?.generation,
-                message: error.message?.toString() || '',
+                message: (error as HttpError).body.message?.toString() || '',
                 phase: PreviewVersionStatusPhase.Failed,
                 ready: false,
               }
             )
           } catch (statusError) {
-            this.log.error(statusError.body || statusError)
+            this.log.error((statusError as HttpError).body)
           }
         }
+        */
       }
     )
   }
