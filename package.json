@@ -8,7 +8,7 @@
     "apis/*"
   ],
   "devDependencies": {
-    "@atls/actl-cli": "^0.4.50",
+    "@atls/code-service": "^0.0.10",
     "@atls/config-jest": "^0.0.2",
     "@atls/k8s-test-utils": "workspace:0.0.1",
     "@jest/core": "^27.4.5",
