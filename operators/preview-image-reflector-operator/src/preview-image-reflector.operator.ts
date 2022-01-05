@@ -1,4 +1,3 @@
-import { Logger }                           from '@atls/logger'
 import { KubeConfig }                       from '@kubernetes/client-node'
 import { HttpError }                        from '@kubernetes/client-node'
 
@@ -22,8 +21,6 @@ import { kind2Plural }                      from '@atls/k8s-resource-utils'
 import { PreviewAutomationsRegistry }       from './preview-automations.registry'
 
 export class PreviewImageReflectorOperator extends Operator {
-  private readonly log = new Logger(PreviewImageReflectorOperator.name)
-
   private readonly automationRegistry = new PreviewAutomationsRegistry()
 
   private readonly previewVersionApi: PreviewVersionApi

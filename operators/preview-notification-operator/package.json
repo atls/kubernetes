@@ -15,13 +15,12 @@
     "@atls/k8s-operator": "workspace:0.0.1",
     "@atls/k8s-preview-automation-api": "workspace:0.0.1",
     "@atls/k8s-resource-utils": "workspace:0.0.1",
-    "@atls/logger": "^0.0.1",
     "@kubernetes/client-node": "^0.16.1",
     "@octokit/rest": "^18.12.0"
   },
   "devDependencies": {
     "@atls/k8s-test-utils": "workspace:0.0.1",
     "@kubernetes/client-node": "^0.16.1",
-    "retry-ignore-abort": "^2.2.15"
+    "retry-ignore-abort": "^2.2.27"
   }
 }

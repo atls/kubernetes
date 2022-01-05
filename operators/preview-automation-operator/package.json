@@ -18,9 +18,7 @@
     "@atls/k8s-object-utils": "workspace:0.0.1",
     "@atls/k8s-operator": "workspace:0.0.1",
     "@atls/k8s-preview-automation-api": "workspace:0.0.1",
-    "@atls/k8s-resource-utils": "workspace:0.0.1",
-    "@atls/logger": "^0.0.1",
-    "kustomize": "^4.4.1"
+    "@atls/k8s-resource-utils": "workspace:0.0.1"
   },
   "devDependencies": {
     "@atls/k8s-test-utils": "workspace:0.0.1",
