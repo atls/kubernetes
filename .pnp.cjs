@@ -69,6 +69,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:operators/preview-image-reflector-operator"
       },
       {
+        "name": "@atls/k8s-preview-notification-operator",
+        "reference": "workspace:operators/preview-notification-operator"
+      },
+      {
         "name": "@atls/k8s-preview-pull-request-sync-operator",
         "reference": "workspace:operators/preview-pull-request-sync-operator"
       },
@@ -90,6 +94,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@atls/k8s-preview-automation-api", ["workspace:apis/preview-automation-api"]],
       ["@atls/k8s-preview-automation-operator", ["workspace:operators/preview-automation-operator"]],
       ["@atls/k8s-preview-image-reflector-operator", ["workspace:operators/preview-image-reflector-operator"]],
+      ["@atls/k8s-preview-notification-operator", ["workspace:operators/preview-notification-operator"]],
       ["@atls/k8s-preview-pull-request-sync-operator", ["workspace:operators/preview-pull-request-sync-operator"]],
       ["@atls/k8s-preview-router-operator", ["workspace:operators/preview-router-operator"]],
       ["@atls/k8s-resource-utils", ["workspace:kubernetes/resource-utils"]],
@@ -678,6 +683,23 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@kubernetes/client-node", "npm:0.16.1"],
             ["deep-equal", "npm:2.0.5"],
             ["parse-docker-image-name", "npm:3.0.0"],
+            ["retry-ignore-abort", "npm:2.2.27"]
+          ],
+          "linkType": "SOFT",
+        }]
+      ]],
+      ["@atls/k8s-preview-notification-operator", [
+        ["workspace:operators/preview-notification-operator", {
+          "packageLocation": "./operators/preview-notification-operator/",
+          "packageDependencies": [
+            ["@atls/k8s-preview-notification-operator", "workspace:operators/preview-notification-operator"],
+            ["@atls/k8s-operator", "workspace:kubernetes/operator"],
+            ["@atls/k8s-preview-automation-api", "workspace:apis/preview-automation-api"],
+            ["@atls/k8s-resource-utils", "workspace:kubernetes/resource-utils"],
+            ["@atls/k8s-test-utils", "workspace:kubernetes/test-utils"],
+            ["@atls/logger", "npm:0.0.1"],
+            ["@kubernetes/client-node", "npm:0.16.1"],
+            ["@octokit/rest", "npm:18.12.0"],
             ["retry-ignore-abort", "npm:2.2.27"]
           ],
           "linkType": "SOFT",
