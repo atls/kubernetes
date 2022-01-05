@@ -1,0 +1,25 @@
+{
+  "name": "@atls/k8s-operator",
+  "version": "0.0.1",
+  "license": "BSD-3-Clause",
+  "main": "src/index.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "yarn library build",
+    "prepack": "yarn run build",
+    "postpack": "rm -rf dist"
+  },
+  "dependencies": {
+    "@atls/logger": "^0.0.1",
+    "@kubernetes/client-node": "^0.15.1",
+    "async": "^3.2.1",
+    "axios": "^0.21.4",
+    "node-fetch": "^2.6.6"
+  },
+  "devDependencies": {
+    "@atls/k8s-test-utils": "workspace:0.0.1",
+    "retry-ignore-abort": "^2.2.27"
+  }
+}

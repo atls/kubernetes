@@ -1,0 +1,19 @@
+{
+  "name": "@atls/k8s-flux-toolkit-api",
+  "version": "0.0.1",
+  "license": "BSD-3-Clause",
+  "main": "src/index.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "yarn library build",
+    "prepack": "yarn run build",
+    "postpack": "rm -rf dist"
+  },
+  "dependencies": {
+    "@atls/k8s-resource-utils": "workspace:0.0.1",
+    "@atls/logger": "^0.0.1",
+    "@kubernetes/client-node": "^0.15.1"
+  }
+}
