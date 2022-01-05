@@ -67,6 +67,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {
         "name": "@atls/k8s-preview-image-reflector-operator",
         "reference": "workspace:operators/preview-image-reflector-operator"
+      },
+      {
+        "name": "@atls/k8s-preview-router-operator",
+        "reference": "workspace:operators/preview-router-operator"
       }
     ],
     "enableTopLevelFallback": true,
@@ -82,6 +86,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@atls/k8s-preview-automation-api", ["workspace:apis/preview-automation-api"]],
       ["@atls/k8s-preview-automation-operator", ["workspace:operators/preview-automation-operator"]],
       ["@atls/k8s-preview-image-reflector-operator", ["workspace:operators/preview-image-reflector-operator"]],
+      ["@atls/k8s-preview-router-operator", ["workspace:operators/preview-router-operator"]],
       ["@atls/k8s-resource-utils", ["workspace:kubernetes/resource-utils"]],
       ["@atls/k8s-test-utils", ["workspace:kubernetes/test-utils"]],
       ["kubernetes", ["workspace:."]]
@@ -667,6 +672,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@kubernetes/client-node", "npm:0.16.1"],
             ["deep-equal", "npm:2.0.5"],
             ["parse-docker-image-name", "npm:3.0.0"],
+            ["retry-ignore-abort", "npm:2.2.27"]
+          ],
+          "linkType": "SOFT",
+        }]
+      ]],
+      ["@atls/k8s-preview-router-operator", [
+        ["workspace:operators/preview-router-operator", {
+          "packageLocation": "./operators/preview-router-operator/",
+          "packageDependencies": [
+            ["@atls/k8s-preview-router-operator", "workspace:operators/preview-router-operator"],
+            ["@atls/k8s-istio-api", "workspace:apis/istio-api"],
+            ["@atls/k8s-operator", "workspace:kubernetes/operator"],
+            ["@atls/k8s-preview-automation-api", "workspace:apis/preview-automation-api"],
+            ["@atls/k8s-resource-utils", "workspace:kubernetes/resource-utils"],
+            ["@atls/k8s-test-utils", "workspace:kubernetes/test-utils"],
+            ["@atls/logger", "npm:0.0.1"],
+            ["@kubernetes/client-node", "npm:0.16.1"],
+            ["deep-equal", "npm:2.0.5"],
             ["retry-ignore-abort", "npm:2.2.27"]
           ],
           "linkType": "SOFT",

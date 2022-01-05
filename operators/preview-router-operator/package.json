@@ -1,0 +1,27 @@
+{
+  "name": "@atls/k8s-preview-router-operator",
+  "version": "0.0.1",
+  "license": "BSD-3-Clause",
+  "main": "src/index.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "yarn library build",
+    "prepack": "yarn run build",
+    "postpack": "rm -rf dist"
+  },
+  "dependencies": {
+    "@atls/k8s-istio-api": "workspace:0.0.1",
+    "@atls/k8s-operator": "workspace:0.0.1",
+    "@atls/k8s-preview-automation-api": "workspace:0.0.1",
+    "@atls/k8s-resource-utils": "workspace:0.0.1",
+    "@atls/logger": "^0.0.1",
+    "deep-equal": "^2.0.5"
+  },
+  "devDependencies": {
+    "@atls/k8s-test-utils": "workspace:0.0.1",
+    "@kubernetes/client-node": "^0.16.1",
+    "retry-ignore-abort": "^2.2.15"
+  }
+}
