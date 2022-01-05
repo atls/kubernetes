@@ -10,10 +10,10 @@
   "dependencies": {
     "@atls/k8s-k3d": "workspace:0.0.1",
     "@atls/logger": "^0.0.1",
-    "@kubernetes/client-node": "^0.15.1"
+    "@kubernetes/client-node": "^0.16.1"
   },
   "devDependencies": {
-    "@types/faker": "^5",
+    "@types/faker": "^5.5.9",
     "faker": "^5.5.3"
   }
 }

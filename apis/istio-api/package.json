@@ -14,6 +14,6 @@
   "dependencies": {
     "@atls/k8s-resource-utils": "workspace:0.0.1",
     "@atls/logger": "^0.0.1",
-    "@kubernetes/client-node": "^0.15.1"
+    "@kubernetes/client-node": "^0.16.1"
   }
 }

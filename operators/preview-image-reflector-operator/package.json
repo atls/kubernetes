@@ -1,5 +1,5 @@
 {
-  "name": "@atls/k8s-preview-automation-operator",
+  "name": "@atls/k8s-preview-image-reflector-operator",
   "version": "0.0.1",
   "license": "BSD-3-Clause",
   "main": "src/index.ts",
@@ -13,22 +13,16 @@
   },
   "dependencies": {
     "@atls/k8s-flux-toolkit-api": "workspace:0.0.1",
-    "@atls/k8s-istio-api": "workspace:0.0.1",
-    "@atls/k8s-kustomize": "workspace:0.0.1",
-    "@atls/k8s-object-utils": "workspace:0.0.1",
     "@atls/k8s-operator": "workspace:0.0.1",
     "@atls/k8s-preview-automation-api": "workspace:0.0.1",
     "@atls/k8s-resource-utils": "workspace:0.0.1",
     "@atls/logger": "^0.0.1",
-    "kustomize": "^4.4.1"
+    "deep-equal": "^2.0.5",
+    "parse-docker-image-name": "^3.0.0"
   },
   "devDependencies": {
     "@atls/k8s-test-utils": "workspace:0.0.1",
     "@kubernetes/client-node": "^0.16.1",
-    "@types/faker": "^5.5.9",
-    "axios": "^0.24.0",
-    "faker": "^5.5.3",
-    "jest-mock-process": "^1.4.1",
-    "retry-ignore-abort": "^2.2.27"
+    "retry-ignore-abort": "^2.2.15"
   }
 }
