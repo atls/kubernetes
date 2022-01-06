@@ -128,7 +128,7 @@ export class PreviewPullRequestSyncOperator extends Operator {
 
     await this.watchResource(
       PreviewAutomationDomain.Group,
-      PreviewVersionResourceVersion.v1alpha1,
+      PreviewVersionResourceVersion.v1beta1,
       kind2Plural(PreviewVersionResourceGroup.PreviewVersion),
       async (event) => {
         try {
