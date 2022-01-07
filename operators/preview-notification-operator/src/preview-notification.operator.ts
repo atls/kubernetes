@@ -84,13 +84,13 @@ export class PreviewNotificationOperator extends Operator {
           const message =
             event.type === ResourceEventType.Added || event.type === ResourceEventType.Modified
               ? this.messageFormatter.formatPullRequestDeployed(
-                automation.name,
-                automation.endpoint.hosts
-              )
+                  automation.name,
+                  automation.endpoint.hosts
+                )
               : this.messageFormatter.formatPullRequestUndeployed(
-                automation.name,
-                automation.endpoint.hosts
-              )
+                  automation.name,
+                  automation.endpoint.hosts
+                )
 
           await this.provider.notify(automation.source, automation.context, message)
 
