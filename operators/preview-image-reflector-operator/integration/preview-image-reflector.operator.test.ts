@@ -3,12 +3,13 @@
  */
 
 import { KubeConfig }                    from '@kubernetes/client-node'
-import { retry }                         from 'retry-ignore-abort'
-import { join }                          from 'path'
 
-import { kubectl }                       from '@atls/k8s-kubectl-tool'
-import { PreviewVersionApi }             from '@atls/k8s-preview-automation-api'
+import { join }                          from 'path'
+import { retry }                         from 'retry-ignore-abort'
+
 import { ImagePolicyApi }                from '@atls/k8s-flux-toolkit-api'
+import { PreviewVersionApi }             from '@atls/k8s-preview-automation-api'
+import { cluster }                       from '@atls/k8s-test-utils'
 
 import { PreviewImageReflectorOperator } from '../src'
 
@@ -18,11 +19,10 @@ describe('preview-image-reflector.operator', () => {
   let previewVersionApi: PreviewVersionApi
   let imagePolicyApi: ImagePolicyApi
   let operator: PreviewImageReflectorOperator
+  let kubeConfig: KubeConfig
 
   beforeAll(async () => {
-    const kubeConfig = new KubeConfig()
-
-    kubeConfig.loadFromDefault()
+    kubeConfig = await cluster.getKubeConfig()
 
     if (!kubeConfig.getCurrentContext().includes('test')) {
       throw new Error('Require test kube config context.')
@@ -31,27 +31,26 @@ describe('preview-image-reflector.operator', () => {
     previewVersionApi = new PreviewVersionApi(kubeConfig)
     imagePolicyApi = new ImagePolicyApi(kubeConfig)
 
-    // TODO: run only on ci
-    await kubectl.run(['apply', '-f', join(__dirname, 'crd'), '--recursive'])
-    await kubectl.run(['apply', '-f', join(__dirname, 'specs'), '--recursive'])
+    await cluster.apply(join(__dirname, 'specs'))
   })
 
   beforeEach(async () => {
-    operator = new PreviewImageReflectorOperator()
+    operator = new PreviewImageReflectorOperator(kubeConfig)
 
-    await operator.start()
+    operator.start()
 
     await retry(
       async () => {
-        // @ts-ignore
-        const { automations } = operator.automationRegistry
-
-        if (!automations.has('preview-image-reflector-operator-test-flux-system')) {
+        if (
+          !operator
+            .getAutomationRegistry()
+            .hasByKey('preview-image-reflector-operator-test-flux-system')
+        ) {
           throw new Error('Automation not added')
         }
       },
       {
-        retries: 5,
+        retries: 6,
       }
     )
   })
@@ -66,14 +65,13 @@ describe('preview-image-reflector.operator', () => {
         op: 'replace',
         path: '/status',
         value: {
-          latestImage: 'atls/preview-operator-test-image:14-99d4f04-1617363779475',
+          latestImage: 'monstrs/preview-operator-test-image:14-99d4f04-1617363779475',
         },
       },
     ])
 
     const previewVersion = await retry(
-      async () =>
-        previewVersionApi.getPreviewVersion('default', 'preview-image-reflector-operator-test-14'),
+      async () => previewVersionApi.getPreviewVersion('preview-image-reflector-operator-test-14'),
       {
         retries: 20,
       }

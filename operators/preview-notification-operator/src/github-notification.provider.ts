@@ -1,6 +1,6 @@
 import { Octokit }              from '@octokit/rest'
 
-import { NotificationProvider } from './notification-provider.intefaces'
+import { NotificationProvider } from './notification-provider.interfaces'
 
 export class GitHubNotificationProvider implements NotificationProvider {
   private readonly octokit: Octokit

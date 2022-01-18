@@ -20,7 +20,7 @@ spec:
         app: preview-image-reflector-operator-test
     spec:
       containers:
-        - image: nginx/stable-alpine:latest
+        - image: monstrs/preview-operator-test-image:latest
           imagePullPolicy: Always
           name: preview-operator-test
           ports:

@@ -1,0 +1,19 @@
+{
+  "name": "@atls/k8s-test-utils",
+  "version": "0.0.1",
+  "private": true,
+  "license": "BSD-3-Clause",
+  "main": "src/index.ts",
+  "files": [
+    "dist/"
+  ],
+  "dependencies": {
+    "@atls/k8s-k3d": "workspace:0.0.1",
+    "@atls/logger": "^0.0.1",
+    "@kubernetes/client-node": "^0.16.1"
+  },
+  "devDependencies": {
+    "@types/faker": "^5.5.9",
+    "faker": "^5.5.3"
+  }
+}

@@ -1,25 +1,24 @@
 {
   "name": "@atls/k8s-preview-operator",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "BSD-3-Clause",
   "files": [
     "dist/"
   ],
   "scripts": {
-    "prepack": "yarn app service build",
-    "dev": "yarn app service dev",
-    "build": "yarn app service build",
+    "build": "yarn service build",
+    "dev": "yarn service dev",
+    "prepack": "yarn service build",
     "start": "node dist/index.js"
   },
-  "devDependencies": {
-    "@atls/k8s-preview-automation-operator": "workspace:0.0.0",
-    "@atls/k8s-preview-image-reflector-operator": "workspace:0.0.0",
-    "@atls/k8s-preview-notification-operator": "workspace:0.0.0",
-    "@atls/k8s-preview-pull-request-sync-operator": "workspace:0.0.0",
-    "@atls/k8s-preview-router-operator": "workspace:0.0.0"
-  },
   "dependencies": {
-    "ffi-napi": "^4.0.3",
-    "ref-napi": "^3.0.2"
+    "express": "*"
+  },
+  "devDependencies": {
+    "@atls/k8s-preview-automation-operator": "workspace:0.0.1",
+    "@atls/k8s-preview-image-reflector-operator": "workspace:0.0.1",
+    "@atls/k8s-preview-notification-operator": "workspace:0.0.1",
+    "@atls/k8s-preview-pull-request-sync-operator": "workspace:0.0.1",
+    "@atls/k8s-preview-router-operator": "workspace:0.0.1"
   }
 }

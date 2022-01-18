@@ -1,8 +1,8 @@
+import { PreviewAutomationOperator }      from '@atls/k8s-preview-automation-operator'
 import { PreviewImageReflectorOperator }  from '@atls/k8s-preview-image-reflector-operator'
 import { PreviewNotificationOperator }    from '@atls/k8s-preview-notification-operator'
-import { PreviewAutomationOperator }      from '@atls/k8s-preview-automation-operator'
-import { PreviewRouterOperator }          from '@atls/k8s-preview-router-operator'
 import { PreviewPullRequestSyncOperator } from '@atls/k8s-preview-pull-request-sync-operator'
+import { PreviewRouterOperator }          from '@atls/k8s-preview-router-operator'
 
 const bootstrap = async () => {
   const automationOperator = new PreviewAutomationOperator()
@@ -38,5 +38,8 @@ const bootstrap = async () => {
   process.on('SIGTERM', () => exit('SIGTERM')).on('SIGINT', () => exit('SIGINT'))
 }
 
-// eslint-disable-next-line no-console
-bootstrap().catch(console.error)
+bootstrap().catch((error) => {
+  // eslint-disable-next-line no-console
+  console.error(error)
+  process.exit(1)
+})
