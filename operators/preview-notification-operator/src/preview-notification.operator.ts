@@ -7,7 +7,7 @@ import { PreviewAutomationAnnotation }        from '@atls/k8s-preview-automation
 
 import { GitHubNotificationProvider }         from './github-notification.provider'
 import { MessageFormatter }                   from './message.formatter'
-import { NotificationProvider }               from './notification-provider.intefaces'
+import { NotificationProvider }               from './notification-provider.interfaces'
 import { NotificationResourceTracker }        from './notification-resource.tracker'
 import { PreviewNotificationOperatorOptions } from './preview-notification.interfaces'
 
