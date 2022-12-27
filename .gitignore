@@ -42,7 +42,7 @@ node_modules
 
 dist/
 
-.idea/workspace.xml
-.idea/vcs.xml
+.idea
+*.iml
 
 package.tgz
