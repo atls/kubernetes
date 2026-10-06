@@ -44,5 +44,6 @@ dist/
 
 .idea
 *.iml
+.run/
 
 package.tgz
